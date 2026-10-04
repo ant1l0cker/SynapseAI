@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SynapseAI — AI Hiring Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+a{text-decoration:none;color:inherit}ul{list-style:none}button,input,select{font-family:inherit}
+:root{--fd:'Plus Jakarta Sans',sans-serif;--fb:'Inter',sans-serif;--fm:'Inter',sans-serif;--cut:14px;--t:220ms cubic-bezier(.4,0,.2,1);
+--bg:#0b0a09;--bg2:#121010;--sf:#181513;--bd:rgba(255,255,255,.09);--bd2:rgba(255,255,255,.17);
+--tx:#f5f2ee;--mu:#9a918a;--fa:#645d56;--ac:#ff7a1a;--acd:#d9600a;--acs:rgba(255,122,26,.11);--ok:#4ade80}
+body{background:var(--bg);color:var(--tx);font-family:var(--fb);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:env(safe-area-inset-top,0px)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:var(--fd);font-weight:700;line-height:1.12;letter-spacing:-.02em}
+.pad{padding:96px 0}
+.eyebrow{font-family:var(--fm);font-size:11.5px;letter-spacing:.14em;font-weight:600;text-transform:uppercase;color:var(--ac);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:7px;height:7px;background:var(--ac);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+h2{font-size:clamp(27px,3.2vw,38px);margin-top:14px}
+.btn{font-family:var(--fd);font-weight:600;font-size:15px;letter-spacing:0;padding:14px 28px;border:1.5px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
+clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)));transition:var(--t)}
+.btn-p{background:var(--ac);color:#0b0a09}.btn-p:hover{background:var(--acd)}
+.btn-g{background:transparent;border-color:var(--bd2);color:var(--tx)}.btn-g:hover{border-color:var(--ac);color:var(--ac)}
+.btn-sm{padding:10px 20px;font-size:12.5px;--cut:9px}
+.btn:focus-visible,input:focus-visible,select:focus-visible,.drop:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:var(--t);border-bottom:1px solid transparent}
+header.s{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);border-bottom-color:var(--bd)}
+nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{font-family:var(--fd);font-weight:800;font-size:24px;letter-spacing:-.02em;display:flex;align-items:center}
+.logo b{color:var(--ac);font-weight:700}
+.links{display:flex;gap:34px}
+.links a{font-family:var(--fd);font-weight:600;font-size:14.5px;letter-spacing:0;color:var(--mu);transition:color var(--t)}
+.links a:hover{color:var(--tx)}
+.nr{display:flex;gap:12px;align-items:center}
+.burger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:44px;height:44px;background:none;border:1px solid var(--bd2);cursor:pointer;transition:var(--t)}
+.burger:hover{border-color:var(--ac)}.burger span{width:20px;height:2px;background:var(--tx)}
+@media(max-width:800px){.burger{display:flex}.links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--bd);flex-direction:column;gap:0}.links.open{display:flex}.links a{display:block;padding:16px 28px;border-top:1px solid var(--bd)}}
+.hero{padding:170px 0 100px;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 50% at 80% 0%,var(--acs),transparent 60%),var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(to bottom,transparent,#000b 30%,transparent 90%)}
+.glow{position:absolute;width:56vw;height:56vw;max-width:680px;max-height:680px;border-radius:50%;top:-22%;right:-12%;background:radial-gradient(circle,rgba(255,122,26,.34),transparent 70%);filter:blur(50px);animation:gp 7s ease-in-out infinite}
+@keyframes gp{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.85;transform:scale(1.1)}}
+.hero .in{position:relative;max-width:760px}
+.hero h1{font-size:clamp(38px,5.4vw,64px);margin:18px 0 20px}.hero h1 span{color:var(--ac)}
+.lead{font-size:17px;color:var(--mu);max-width:540px;margin-bottom:32px}
+.acts{display:flex;gap:14px;flex-wrap:wrap}
+.stats{display:flex;gap:44px;flex-wrap:wrap;margin-top:44px}
+.stats .n{font-family:var(--fm);font-size:28px;color:var(--ac)}.stats .l{font-size:12px;color:var(--fa);text-transform:uppercase;letter-spacing:.05em}
+.alt{background:var(--bg2);border-block:1px solid var(--bd)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);margin-top:48px;position:relative}
+.steps::before{content:"";position:absolute;top:22px;left:0;right:0;height:1px;background:var(--bd2)}
+.step{padding-right:22px;position:relative}
+.step .ix{font-family:var(--fm);font-size:14px;color:var(--ac);width:44px;height:44px;border:1.5px solid var(--ac);background:var(--bg2);display:flex;align-items:center;justify-content:center;margin-bottom:22px;position:relative}
+.step h3{font-size:17px;margin-bottom:8px}.step p{font-size:13.5px;color:var(--mu)}
+@media(max-width:860px){.steps{grid-template-columns:1fr;gap:30px}.steps::before{display:none}}
+.bar{display:flex;gap:12px;flex-wrap:wrap;margin:36px 0 10px}
+.bar input,.bar select{background:var(--sf);border:1px solid var(--bd2);color:var(--tx);padding:12px 14px;font-size:14px;min-width:0}
+.bar input{flex:1 1 240px}.bar select{flex:0 1 190px}
+.count{font-family:var(--fm);font-size:12px;color:var(--fa);margin-bottom:18px}
+.jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd)}
+@media(max-width:1000px){.jobs{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.jobs{grid-template-columns:1fr}}
+.job{background:var(--bg);padding:26px 24px;display:flex;flex-direction:column;transition:background var(--t)}
+.job:hover{background:var(--sf)}
+.job .cat{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:8px}
+.job h3{font-size:19px;margin-bottom:4px}.job .co{font-size:13px;color:var(--mu);margin-bottom:14px}
+.job .meta{font-size:12.5px;color:var(--fa);margin-bottom:16px;flex:1}
+.job .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rate{font-family:var(--fm);font-size:21px}.rate small{font-size:11.5px;color:var(--fa)}
+.job .btn.done{background:transparent;border-color:var(--ok);color:var(--ok);cursor:default}
+.empty{padding:40px;text-align:center;color:var(--mu);background:var(--bg)}
+.vgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+@media(max-width:860px){.vgrid{grid-template-columns:1fr;gap:30px}}
+.vgrid p.t{color:var(--mu);margin-top:16px;max-width:430px}
+.vlist{margin-top:22px}.vlist li{font-size:13.5px;color:var(--mu);padding:9px 0;border-top:1px solid var(--bd);display:flex;gap:10px}
+.vlist li::before{content:"";width:7px;height:7px;margin-top:8px;background:var(--ac);flex-shrink:0;clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.card{background:linear-gradient(180deg,var(--acs),transparent 40%),var(--sf);border:1px solid var(--ac);padding:30px 28px}
+.card label.f{display:block;font-family:var(--fm);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mu);margin:0 0 8px}
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:22px}
+.types label{cursor:pointer}.types input{position:absolute;opacity:0}
+.types span{display:block;text-align:center;padding:12px 6px;border:1.5px solid var(--bd2);font-family:var(--fd);font-weight:600;font-size:14px;color:var(--mu);transition:var(--t)}
+.types input:checked+span{border-color:var(--ac);color:var(--ac);background:var(--acs)}
+.types input:focus-visible+span{outline:2px solid var(--ac);outline-offset:2px}
+.drop{border:1.5px dashed var(--bd2);padding:30px 16px;text-align:center;cursor:pointer;transition:var(--t);margin-bottom:18px;color:var(--mu);font-size:14px}
+.drop:hover,.drop.over{border-color:var(--ac);background:var(--acs)}
+.drop img{max-height:170px;max-width:100%;margin:0 auto 10px;display:block}
+.drop small{display:block;color:var(--fa);font-size:12px;margin-top:4px}
+.card input[type=text],.card input[type=email],.card input[type=tel],.card input[type=date],.card select,.card textarea{font-family:inherit;width:100%;background:var(--bg);border:1px solid var(--bd2);color:var(--tx);padding:12px 14px;font-size:14px;margin-bottom:18px}
+.msg{font-size:13px;min-height:20px;margin-top:14px;color:var(--mu)}.msg.err{color:#ff6b5b}.msg.ok{color:var(--ok)}
+.card .btn{width:100%}
+.badge{font-family:var(--fm);font-size:11.5px;padding:8px 14px;border:1px solid var(--bd2);color:var(--mu)}
+.badge.v{border-color:var(--ok);color:var(--ok)}
+footer{padding:50px 0 28px;background:var(--bg2);border-top:1px solid var(--bd)}
+.ft{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--fm);font-size:11.5px;color:var(--fa);margin-top:22px}
+footer p{font-size:13.5px;color:var(--mu);max-width:340px;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ac);color:#0b0a09;font-family:var(--fd);font-weight:600;padding:13px 22px;opacity:0;pointer-events:none;transition:var(--t);z-index:99;max-width:92vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+[hidden]{display:none!important}
+.btn:active,.burger:active,.x:active{transform:scale(.96)}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+.mbg{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}
+.mbox{position:relative;width:100%;max-width:640px;max-height:92vh;overflow-y:auto;background-color:var(--sf)}
+.x{position:absolute;top:10px;right:10px;width:44px;height:44px;background:none;border:1px solid var(--bd2);color:var(--tx);font-size:24px;line-height:1;cursor:pointer;transition:var(--t)}
+.x:hover{border-color:var(--ac);color:var(--ac)}.x:focus-visible,.burger:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.drop{padding:22px 16px}.drop img{max-height:120px}
+@media(pointer:coarse){.btn-sm{min-height:44px}}
+@media(max-width:480px){.types{grid-template-columns:1fr}.card{padding:24px 18px}.btn{padding:14px 22px}}
+.stepbar{display:flex;gap:8px;margin-bottom:22px}
+.stepbar span{flex:1;padding:0 0 8px;border-bottom:2px solid var(--bd2);font-size:12.5px;font-weight:600;color:var(--fa);transition:var(--t)}
+.stepbar span.on{border-color:var(--ac);color:var(--ac)}
+.two{display:flex;gap:10px}.two .btn{flex:1;width:auto}.two .btn-g{flex:0 0 32%}
+.card{color-scheme:dark}.card textarea{resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.grid2>div{min-width:0}.grid2 .full{grid-column:1/-1}
+.stepbar span{font-size:11.5px}.stepbar span.done{border-color:var(--acd);color:var(--mu)}
+.q{margin-bottom:20px}.q p{font-weight:600;font-size:14.5px;margin-bottom:10px}
+.opt{display:block;cursor:pointer;margin-bottom:8px}.opt input{position:absolute;opacity:0}
+.opt span{display:block;padding:11px 14px;border:1.5px solid var(--bd2);font-size:13.5px;color:var(--mu);transition:var(--t)}
+.opt:hover span{border-color:var(--ac)}.opt input:checked+span{border-color:var(--ac);color:var(--tx);background:var(--acs)}
+.opt input:focus-visible+span{outline:2px solid var(--ac);outline-offset:2px}
+.score{font-family:var(--fd);font-size:60px;font-weight:800;color:var(--ac);line-height:1}
+.score.bad{color:#ff6b5b}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header id="hd"><div class="wrap"><nav>
+<a href="#top" class="logo">Synapse<b>AI</b></a>
+<ul class="links" id="links"><li><a href="#how">How it works</a></li><li><a href="#jobs">Jobs</a></li></ul>
+<div class="nr"><a href="#jobs" class="btn btn-p btn-sm">Find jobs</a><button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+</nav></div></header>
+
+<main id="top">
+<section class="hero"><div class="glow"></div><div class="wrap"><div class="in">
+<span class="eyebrow">AI-matched hiring</span>
+<h1>Get hired by the roles that <span>actually fit</span> you</h1>
+<p class="lead">SynapseAI matches verified candidates to hourly jobs paying $15 to $45 an hour. Upload your ID and CV when you apply, and we handle the rest.</p>
+<div class="acts"><a href="#jobs" class="btn btn-p">Browse 75 jobs</a><a href="#how" class="btn btn-g">How it works</a></div>
+<div class="stats"><div><div class="n">75</div><div class="l">Open roles</div></div><div><div class="n">$15–$45</div><div class="l">Per hour</div></div><div><div class="n">80%</div><div class="l">Remote roles</div></div></div>
+</div></div></section>
+
+<section class="alt pad" id="how"><div class="wrap">
+<span class="eyebrow">How it works</span><h2>From sign-up to applied in four steps.</h2>
+<div class="steps">
+<div class="step"><div class="ix">01</div><h3>Pick a role</h3><p>Search 75 hourly jobs and filter by pay.</p></div>
+<div class="step"><div class="ix">02</div><h3>Profile and verify</h3><p>Add your details, an ID and your CV.</p></div>
+<div class="step"><div class="ix">03</div><h3>Take the assessment</h3><p>Twenty questions score your fit for the role.</p></div>
+<div class="step"><div class="ix">04</div><h3>Start working</h3><p>Pass and get your start details right away.</p></div>
+</div></div></section>
+
+<section class="pad" id="jobs"><div class="wrap">
+<span class="eyebrow">Open roles</span><h2>75 jobs hiring now.</h2>
+<div class="bar">
+<input type="text" id="q" placeholder="Search job title or company" aria-label="Search jobs">
+<select id="cat" aria-label="Category"><option value="">All categories</option></select>
+<select id="sort" aria-label="Sort"><option value="hi">Pay: high to low</option><option value="lo">Pay: low to high</option></select>
+</div>
+<div class="count" id="count"></div>
+<div class="jobs" id="list"></div>
+<div style="text-align:center;margin-top:28px"><button class="btn btn-g" id="more">Show more jobs</button></div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+<a href="#top" class="logo">Synapse<b>AI</b></a>
+<p>AI hiring for hourly roles. Verified candidates, fair pay.</p>
+<div class="ft"><span>&copy; <span id="yr"></span> SynapseAI. All rights reserved.</span><span>SYSTEM STATUS: OPERATIONAL</span></div>
+</div></footer>
+<div class="modal" id="modal" hidden>
+<div class="mbg" data-close></div>
+<div class="card mbox" role="dialog" aria-modal="true" aria-labelledby="mt">
+<button type="button" class="x" data-close aria-label="Close">&times;</button>
+<span class="eyebrow">Apply</span>
+<h3 id="mt" style="font-size:26px;margin-top:10px"></h3>
+<div id="mco" style="font-size:13.5px;color:var(--mu);margin:4px 0 22px"></div>
+<div class="stepbar"><span class="on" id="s1">1 Profile</span><span id="s2">2 Verify</span><span id="s3">3 Assess</span><span id="s4">4 Start</span></div>
+<div id="p1">
+<div class="grid2">
+<div class="full"><label class="f" for="nm">Full name</label><input type="text" id="nm" autocomplete="name" placeholder="Your full name"></div>
+<div><label class="f" for="em">Email</label><input type="email" id="em" autocomplete="email" placeholder="you@example.com"></div>
+<div><label class="f" for="ph">Phone</label><input type="tel" id="ph" autocomplete="tel" placeholder="+1 555 123 4567"></div>
+<div><label class="f" for="dob">Date of birth</label><input type="date" id="dob" autocomplete="bday"></div>
+<div><label class="f" for="lc">City and state</label><input type="text" id="lc" placeholder="e.g. Austin, TX"></div>
+<div><label class="f" for="wa">Work authorization</label><select id="wa"><option value="">Select</option><option>US citizen</option><option>Permanent resident</option><option>Work visa</option></select></div>
+<div><label class="f" for="ed">Education</label><select id="ed"><option value="">Select</option><option>High school or GED</option><option>Some college</option><option>Trade certificate</option><option>Associate degree</option><option>Bachelor's degree</option><option>Master's or higher</option></select></div>
+<div><label class="f" for="ex">Experience</label><select id="ex"><option value="">Select</option><option>None yet</option><option>Under 1 year</option><option>1–3 years</option><option>3–5 years</option><option>5+ years</option></select></div>
+<div><label class="f" for="av">Availability</label><select id="av"><option value="">Select</option><option>Full-time</option><option>Part-time</option><option>Weekends only</option><option>Evenings</option><option>Flexible</option></select></div>
+<div class="full"><label class="f" for="st">Earliest start date</label><input type="date" id="st"></div>
+<div class="full"><label class="f" for="sk">Key skills</label><input type="text" id="sk" placeholder="e.g. customer service, forklift, Excel"></div>
+<div class="full"><label class="f" for="ab">About you (optional)</label><textarea id="ab" rows="3" placeholder="A few lines on your work history and goals"></textarea></div>
+</div>
+<button type="button" class="btn btn-p" id="next">Next</button>
+</div>
+<div id="p2" hidden>
+<label class="f">ID type</label>
+<div class="types">
+<label><input type="radio" name="dt" value="Driver's License" checked><span>Driver's license</span></label>
+<label><input type="radio" name="dt" value="State ID"><span>State ID</span></label>
+<label><input type="radio" name="dt" value="Passport"><span>Passport</span></label>
+</div>
+<label class="f">ID photo</label>
+<div class="drop" id="d-id" tabindex="0" role="button" aria-label="Upload ID"><div id="t-id">Drop your ID here or click to choose<small>The name must match your profile. JPG, PNG or PDF, up to 8 MB</small></div></div>
+<input type="file" id="f-id" accept="image/*,application/pdf" hidden>
+<label class="f">CV</label>
+<div class="drop" id="d-cv" tabindex="0" role="button" aria-label="Upload CV"><div id="t-cv">Drop your CV here or click to choose<small>PDF, DOC or DOCX, up to 8 MB</small></div></div>
+<input type="file" id="f-cv" accept=".pdf,.doc,.docx" hidden>
+<div class="two"><button type="button" class="btn btn-g" id="b2">Back</button><button type="button" class="btn btn-p" id="n2">Next</button></div>
+</div>
+<div id="p3" hidden>
+<p style="font-size:13.5px;color:var(--mu);margin-bottom:20px">Twenty questions. You need 15 correct (75%) to pass.</p>
+<div id="quiz"></div>
+<div class="two"><button type="button" class="btn btn-g" id="b3">Back</button><button type="button" class="btn btn-p" id="n3">Submit assessment</button></div>
+</div>
+<div id="p4" hidden><div id="res"></div></div>
+<div class="msg" id="msg" role="status"></div>
+</div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const X=[
+["Cashier","GreenLeaf Market","Retail",15,"Remote","Part-time"],["Stock Associate","ValueMart","Retail",15,"Remote","Part-time"],["Fast Food Crew Member","Burger Hub","Food Service",15,"Remote","Flexible"],["Janitor / Cleaner","BrightClean","Facilities",15,"Detroit, MI","Full-time"],["Package Handler","ParcelPro","Logistics",16,"Remote","Part-time"],["Server","Table & Vine","Food Service",15,"Remote","Part-time"],["Host","Table & Vine","Food Service",15,"Remote","Part-time"],["Housekeeper","Aster Suites","Hospitality",16,"Miami, FL","Full-time"],["Pet Care Attendant","Happy Paws","Pet Care",16,"Remote","Part-time"],["Lifeguard","City Aquatics","Recreation",16,"Phoenix, AZ","Seasonal"],["Grocery Bagger","GreenLeaf Market","Retail",15,"Remote","Part-time"],["Car Wash Attendant","Sparkle Auto","Automotive",15,"Houston, TX","Part-time"],["Childcare Assistant","Little Oaks","Education",16,"Remote","Part-time"],["Call Center Rep","Brightline Telecom","Support",16,"Remote","Full-time"],["Landscaping Crew","GreenEdge","Skilled Trades",17,"Atlanta, GA","Seasonal"],["Food Delivery Courier","QuickDrop","Logistics",17,"Remote","Flexible"],["Receptionist","Orchard Legal","Admin",17,"Remote","Full-time"],["Mover's Helper","HaulRight","Logistics",17,"Remote","Flexible"],["Cafeteria Worker","Westfield Schools","Food Service",16,"Remote","Part-time"],["Parking Attendant","ParkSmart","Facilities",16,"Remote","Part-time"],["Bartender","Marlow Kitchen","Food Service",17,"Remote","Part-time"],["Teacher's Aide","Westfield Schools","Education",17,"Remote","Part-time"],["Gas Station Attendant","FuelStop","Retail",16,"Remote","Part-time"],["Assembly Line Worker","Forge Industrial","Manufacturing",17,"Remote","Full-time"],["Packaging Operator","Forge Industrial","Manufacturing",18,"Remote","Full-time"],["Inventory Clerk","Cargo Nine","Logistics",18,"Remote","Full-time"],["Virtual Assistant","Ledgerly","Admin",18,"Remote","Part-time"],["Chat Support Agent","Brightline Telecom","Support",18,"Remote","Full-time"],["Online Tutor","BrightPath","Education",18,"Remote","Flexible"],["Personal Care Aide","CareBridge","Healthcare",18,"Remote","Flexible"],["Pharmacy Technician","Valley Clinic","Healthcare",19,"Remote","Full-time"],["Merchandiser","ShelfIQ","Retail",18,"Remote","Part-time"],["Banquet Server","Stagecraft","Hospitality",18,"Remote","Part-time"],["Bakery Assistant","Rye & Rise","Food Service",17,"Remote","Full-time"],["Groundskeeper","GreenEdge","Facilities",18,"Remote","Full-time"],["Shuttle Driver","Aster Suites","Hospitality",19,"Remote","Part-time"],["Sorting Associate","ParcelPro","Logistics",19,"Remote","Full-time"],["Order Picker","Cargo Nine","Logistics",19,"Remote","Full-time"],["Dental Office Assistant","SmileWorks","Healthcare",19,"Remote","Full-time"],["Customer Service Rep","Cobalt Systems","Support",19,"Remote","Full-time"],["Leasing Assistant","Keystone Homes","Admin",19,"Remote","Full-time"],
+["Shift Supervisor","Ember Coffee Co.","Food Service",20,"Remote","Full-time"],["Medical Receptionist","Valley Clinic","Healthcare",20,"Remote","Full-time"],["Welder Helper","Forge Industrial","Manufacturing",21,"Cleveland, OH","Full-time"],["Maintenance Technician","Keystone Homes","Skilled Trades",22,"Remote","Full-time"],["HVAC Helper","BrightWire","Skilled Trades",23,"Remote","Full-time"],["Paralegal Assistant","Orchard Legal","Admin",24,"Remote","Full-time"],["CNC Machine Operator","Forge Industrial","Manufacturing",27,"Remote","Full-time"],["Executive Assistant","Cobalt Systems","Admin",29,"Remote","Full-time"],["Plumber","BrightWire","Skilled Trades",33,"Nashville, TN","Full-time"]];
+const J=[
+["Warehouse Associate","Northline Logistics","Logistics",15,"Remote","Full-time"],
+["Barista","Ember Coffee Co.","Food Service",15,"Remote","Part-time"],
+["Retail Sales Associate","Harbor & Pine","Retail",16,"Remote","Part-time"],
+["Dishwasher / Prep Cook","Marlow Kitchen","Food Service",16,"Remote","Full-time"],
+["Customer Support Agent","Brightline Telecom","Support",17,"Remote","Full-time"],
+["Delivery Driver","QuickDrop","Logistics",18,"Remote","Flexible"],
+["Hotel Front Desk Agent","Aster Suites","Hospitality",18,"Remote","Full-time"],
+["Data Entry Clerk","Ledgerly","Admin",19,"Remote","Part-time"],
+["Security Officer","Sentry Group","Security",20,"Phoenix, AZ","Full-time"],
+["Forklift Operator","Northline Logistics","Logistics",21,"Dallas, TX","Full-time"],
+["Home Health Aide","CareBridge","Healthcare",22,"Columbus, OH","Flexible"],
+["Administrative Assistant","Orchard Legal","Admin",23,"Remote","Full-time"],
+["Line Cook","Marlow Kitchen","Food Service",24,"Remote","Full-time"],
+["Medical Assistant","Valley Clinic","Healthcare",25,"Sacramento, CA","Full-time"],
+["Warehouse Shift Lead","Cargo Nine","Logistics",26,"Remote","Full-time"],
+["Bookkeeper","Tallyworks","Finance",27,"Remote","Part-time"],
+["Event Coordinator","Stagecraft","Hospitality",28,"Remote","Contract"],
+["Licensed Practical Nurse","CareBridge","Healthcare",30,"Tampa, FL","Full-time"],
+["CDL Truck Driver","Ridgeway Freight","Logistics",32,"Kansas City, MO","Full-time"],
+["Social Media Manager","Loop & Co.","Marketing",34,"Remote","Contract"],
+["Electrician","BrightWire","Skilled Trades",36,"Nashville, TN","Full-time"],
+["IT Support Specialist","Cobalt Systems","Tech",38,"Remote","Full-time"],
+["QA Test Analyst","Pixelforge","Tech",40,"Remote","Contract"],
+["Registered Nurse","Valley Clinic","Healthcare",43,"San Diego, CA","Full-time"],
+["Front-End Developer","Synthwave Labs","Tech",45,"Remote","Contract"],
+...X
+].map((a,i)=>({id:i,t:a[0],co:a[1],c:a[2],r:a[3],loc:a[4],ty:a[5]}));
+const $=id=>document.getElementById(id);
+let applied=new Set(),shown=12,cur=null,lastBtn=null,files={id:null,cv:null};
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2800)}
+function msg(t,k){const m=$('msg');m.textContent=t;m.className='msg '+(k||'')}
+[...new Set(J.map(j=>j.c))].sort().forEach(c=>$('cat').add(new Option(c,c)));
+function render(){
+  const q=$('q').value.toLowerCase(),c=$('cat').value,s=$('sort').value;
+  const L=J.filter(j=>(!c||j.c===c)&&(j.t+j.co).toLowerCase().includes(q)).sort((a,b)=>s==='hi'?b.r-a.r:a.r-b.r);
+  const V=L.slice(0,shown);
+  $('count').textContent='Showing '+V.length+' of '+L.length+' roles';
+  $('list').innerHTML=V.length?V.map(j=>`<div class="job"><div class="cat">${j.c}</div><h3>${j.t}</h3><div class="co">${j.co}</div><div class="meta">${j.loc} · ${j.ty}</div><div class="row"><div class="rate">$${j.r}<small>/hr</small></div>${applied.has(j.id)?'<span class="btn btn-sm done">Applied</span>':`<button class="btn btn-p btn-sm" data-id="${j.id}">Apply</button>`}</div></div>`).join(''):'<div class="empty">No roles match. Try a different search or category.</div>';
+  $('more').hidden=V.length>=L.length;
+}
+['q','cat','sort'].forEach(i=>$(i).addEventListener('input',()=>{shown=12;render()}));
+$('more').onclick=()=>{shown+=12;render()};
+$('list').addEventListener('click',e=>{const b=e.target.closest('button[data-id]');if(b)openM(+b.dataset.id,b)});
+function openM(id,b){cur=J[id];lastBtn=b;$('mt').textContent=cur.t;$('mco').textContent=cur.co+' · '+cur.loc+' · $'+cur.r+'/hr';$('modal').hidden=false;document.body.style.overflow='hidden';buildQuiz();go(saved?(verified?3:2):1)}
+let saved=false,verified=false,prof={};
+const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const QS=[["You feel unwell the night before a shift. What do you do?", ["Skip the shift without telling anyone", "Tell your supervisor early so they can find cover", "Show up late and hope nobody notices", "Ask a friend to cover without telling anyone"], 1], ["A coworker is upset about a mistake you made. What's your best response?", ["Listen, apologize where fair, and help fix it", "Argue until they agree with you", "Ignore them", "Blame someone else"], 0], ["You finish your tasks early. What do you do next?", ["Wait quietly", "Leave early", "Ask what else needs doing or help a teammate", "Check your phone"], 2], ["The instructions for a new task are unclear. What do you do?", ["Ask for clarification before you start", "Guess and hope it's right", "Wait for someone to notice", "Skip the task"], 0], ["You notice a spill on the floor. What do you do?", ["Walk past it", "Tell a friend later", "Wait for someone else", "Mark or clean it and tell your supervisor"], 3], ["A customer asks for something you can't do. Best response?", ["Say no and walk away", "Promise it anyway", "Ignore the request", "Explain what you can do and offer an alternative or get a supervisor"], 3], ["Your shift starts at 9:00. When should you arrive?", ["A few minutes early, ready to start", "At 9:00 sharp", "Around 9:20", "Whenever traffic allows"], 0], ["You earn $18 an hour and work 6 hours. What do you earn before tax?", ["$96", "$108", "$118", "$128"], 1], ["A coworker asks you to clock them in because they're late. What do you do?", ["Do it to be nice", "Do it just once", "Decline and suggest they tell the supervisor", "Tell everyone about it"], 2], ["You're given three urgent tasks at once. What's the best first step?", ["Do the easiest one first", "Start all three at once", "Ask which matters most, then work in that order", "Wait until someone decides"], 2], ["You see a coworker being treated unfairly. What's a good step?", ["Say nothing", "Report it to a supervisor or HR", "Spread the story", "Confront them angrily in public"], 1], ["You break a piece of equipment by accident. What do you do?", ["Hide it", "Blame the last person who used it", "Wait to see if anyone notices", "Report it right away"], 3], ["What's the safest way to lift a heavy box?", ["Bend your back and jerk it up", "Twist while lifting", "Keep it close, bend your knees, and lift with your legs", "Lift it above your head"], 2], ["A supervisor gives feedback you disagree with. What do you do?", ["Argue immediately", "Complain to coworkers", "Stop talking to them", "Listen, ask questions, then share your view calmly"], 3], ["An email with an unfamiliar link asks for your password. What do you do?", ["Don't click it; report it as suspicious", "Click the link to check", "Reply with your password", "Forward it to coworkers"], 0], ["How should you handle confidential employer information?", ["Share it with friends", "Keep it private and share only with people who need it", "Post it online", "Discuss it in public places"], 1], ["One task takes 45 minutes. How long do 3 identical tasks take?", ["90 minutes", "2 hours", "2 hours 15 minutes", "3 hours"], 2], ["You're running late because of an emergency. What do you do?", ["Say nothing", "Tell your supervisor as soon as you can and give an arrival time", "Turn off your phone", "Blame traffic afterwards"], 1], ["A new teammate struggles with a process you know well. What do you do?", ["Let them figure it out", "Do their work for them every time", "Offer help and show them patiently", "Tell the supervisor they're slow"], 2], ["What shows good attendance and reliability?", ["Being late occasionally", "Skipping when it's busy", "Leaving without telling anyone", "Showing up on time and giving notice when you can't"], 3]];
+function buildQuiz(){
+  $('quiz').innerHTML=QS.map((q,i)=>`<div class="q"><p>${i+1}. ${q[0]}</p>${q[1].map((o,j)=>`<label class="opt"><input type="radio" name="q${i}" value="${j}"><span>${o}</span></label>`).join('')}</div>`).join('');
+}
+function go(n){
+  for(let i=1;i<=4;i++){$('p'+i).hidden=i!==n;const b=$('s'+i);b.classList.toggle('on',i===n);b.classList.toggle('done',i<n)}
+  msg('');document.querySelector('.mbox').scrollTop=0;
+  if(n===1)$('nm').focus({preventScroll:true});
+}
+function closeM(){$('modal').hidden=true;document.body.style.overflow='';if(lastBtn&&lastBtn.isConnected)lastBtn.focus()}
+document.querySelectorAll('[data-close]').forEach(x=>x.onclick=closeM);
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('modal').hidden)closeM()});
+function setup(key,ok,label){
+  const d=$('d-'+key),i=$('f-'+key),t=$('t-'+key);
+  function pick(x){
+    if(!x)return;
+    if(!ok.test(x.name)){files[key]=null;return msg('Unsupported file. Upload '+label+'.','err')}
+    if(x.size>8*1024*1024){files[key]=null;return msg('File is over 8 MB. Upload a smaller file.','err')}
+    files[key]=x;msg('');t.replaceChildren();
+    if(x.type.startsWith('image/')){const im=new Image();im.src=URL.createObjectURL(x);im.alt='Preview';t.append(im)}
+    t.append(x.name);const s=document.createElement('small');s.textContent='Click to replace';t.append(s);
+  }
+  d.onclick=()=>i.click();
+  d.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();i.click()}};
+  ['dragover','dragenter'].forEach(v=>d.addEventListener(v,e=>{e.preventDefault();d.classList.add('over')}));
+  ['dragleave','drop'].forEach(v=>d.addEventListener(v,e=>{e.preventDefault();d.classList.remove('over')}));
+  d.addEventListener('drop',e=>pick(e.dataTransfer.files[0]));
+  i.onchange=()=>pick(i.files[0]);
+}
+setup('id',/\.(jpe?g|png|pdf)$/i,'a JPG, PNG or PDF');
+setup('cv',/\.(pdf|docx?)$/i,'a PDF, DOC or DOCX');
+$('n2').onclick=()=>{
+  const dt=document.querySelector('[name=dt]:checked').value;
+  if(!files.id)return msg('Upload a photo of your '+dt.toLowerCase()+'.','err');
+  if(!files.cv)return msg('Upload your CV.','err');
+  const b=$('n2');b.disabled=true;b.textContent='Checking…';
+  setTimeout(()=>{b.disabled=false;b.textContent='Next';verified=true;go(3)},1000);
+};
+$('n3').onclick=()=>{
+  let sc=0;
+  for(let i=0;i<QS.length;i++){
+    const c=document.querySelector('[name=q'+i+']:checked');
+    if(!c){document.querySelector('[name=q'+i+']').closest('.q').scrollIntoView({block:'center'});return msg('Answer question '+(i+1)+'.','err')}
+    if(+c.value===QS[i][2])sc++;
+  }
+  const ok=sc>=15,r=$('res');
+  if(ok){
+    applied.add(cur.id);render();
+    r.innerHTML=`<div class="score">${sc}/20</div><h3 style="font-size:24px;margin:10px 0 6px">You're ready to start</h3><p style="font-size:13.5px;color:var(--mu)">You passed. ${esc(cur.co)} can now see your profile, ID check and CV.</p><ul class="vlist"><li>Role: ${esc(cur.t)}, $${cur.r}/hr</li><li>Location: ${esc(cur.loc)}</li><li>Start date: ${esc(prof.st)}</li><li>Offer details and onboarding forms go to ${esc(prof.em)}</li></ul><button type="button" class="btn btn-p" id="startBtn" style="margin-top:22px">Start working</button>`;
+  }else{
+    r.innerHTML=`<div class="score bad">${sc}/20</div><h3 style="font-size:24px;margin:10px 0 6px">Not quite yet</h3><p style="font-size:13.5px;color:var(--mu)">You need 15 of 20 correct (75%) to pass. Retake the assessment when you're ready.</p><button type="button" class="btn btn-p" id="retakeBtn" style="margin-top:22px">Retake assessment</button>`;
+  }
+  go(4);
+};
+$('res').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.id==='startBtn'){const co=cur.co;closeM();toast('Welcome to '+co)}
+  if(b.id==='retakeBtn'){buildQuiz();go(3)}
+};
+$('next').onclick=()=>{
+  const v=id=>$(id).value.trim();
+  if(v('nm').length<2)return msg('Enter your full name.','err');
+  if(!/^\S+@\S+\.\S+$/.test(v('em')))return msg('Enter a valid email address.','err');
+  if(v('ph').replace(/\D/g,'').length<7)return msg('Enter a valid phone number.','err');
+  if(!v('dob'))return msg('Enter your date of birth.','err');
+  if((Date.now()-new Date(v('dob')))/31557600000<18)return msg('You must be 18 or older to apply.','err');
+  if(!v('lc'))return msg('Enter your city and state.','err');
+  for(const [id,n] of [['wa','work authorization'],['ed','education'],['ex','experience'],['av','availability']])if(!v(id))return msg('Select your '+n+'.','err');
+  if(!v('st'))return msg('Choose your earliest start date.','err');
+  if(!v('sk'))return msg('List at least one skill.','err');
+  prof={};['nm','em','ph','dob','lc','wa','ed','ex','av','st','sk','ab'].forEach(k=>prof[k]=v(k));
+  saved=true;go(2);
+};
+$('b2').onclick=()=>go(1);
+$('b3').onclick=()=>go(2);
+const bg=$('burger'),lk=$('links');
+bg.onclick=()=>{const o=lk.classList.toggle('open');bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Close menu':'Open menu')};
+lk.querySelectorAll('a').forEach(a=>a.onclick=()=>{lk.classList.remove('open');bg.setAttribute('aria-expanded',false)});
+addEventListener('scroll',()=>$('hd').classList.toggle('s',scrollY>12));
+$('yr').textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
